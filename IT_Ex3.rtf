@@ -1,0 +1,170 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red27\green31\blue34;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww37740\viewh23220\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 \
+\
+\pard\pardeftab720\sl360\sa320
+
+\b\fs30 \cf2 1.1.3\'a0Consultas sobre una tabla
+\b0\fs24 \cf0 -\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 1. SELECT nombre  FROM tienda.producto;\
+2. SELECT nombre,precio  FROM tienda.producto;\
+3. SELECT * FROM tienda.producto;\
+4. SELECT nombre, precio, precio * 1.11  FROM tienda.producto;\
+5. SELECT nombre AS nombre_de_producto , precio AS euros , precio * 1.11  AS d\'f3lares FROM tienda.producto;\
+6. SELECT UPPER (nombre), precio FROM tienda.producto;\
+7. SELECT LOWER (nombre), precio FROM tienda.producto;\
+8. SELECT nombre, UPPER (LEFT (nombre,2))  FROM tienda.fabricante;\
+9. SELECT  nombre, ROUND (precio) FROM tienda.producto;\
+10. SELECT  nombre, TRUNCATE (precio, 0) FROM tienda.producto;\
+11. SELECT codigo_fabricante FROM tienda.fabricante JOIN tienda.producto ON fabricante.codigo  = producto.codigo_fabricante;\
+12. SELECT DISTINCT codigo_fabricante FROM tienda.fabricante JOIN tienda.producto ON fabricante.codigo  = producto.codigo_fabricante;\
+13. SELECT nombre FROM tienda.fabricante ORDER BY nombre ASC;\
+14. SELECT nombre FROM tienda.fabricante ORDER BY nombre DESC;\
+15. SELECT nombre FROM tienda.fabricante ORDER BY nombre ASC, nombre DESC \
+16. SELECT * FROM tienda.fabricanteWHERE codigo BETWEEN 1 AND 5;\
+17. SELECT * FROM tienda.fabricante WHERE codigo BETWEEN 4 AND 9;\
+18. SELECT nombre, precio FROM tienda.producto ORDER BY precio ASC  LIMIT 1;\
+19. SELECT nombre, precio FROM tienda.producto ORDER BY precio DESC  LIMIT 1;\
+20. SELECT nombre FROM tienda.producto WHERE codigo_fabricante = 2;\
+21. SELECT nombre FROM tienda.producto WHERE precio <= 120;\
+22. SELECT nombre FROM tienda.producto WHERE precio >= 400;\
+23. SELECT nombre FROM tienda.producto WHERE precio < 400;\
+24. SELECT nombre FROM tienda.producto WHERE precio > 80 AND precio < 300;\
+25. SELECT nombre FROM tienda.producto WHERE precio BETWEEN 60 AND 200;\
+26. SELECT nombre FROM tienda.producto WHERE precio > 200 AND codigo_fabricante= 6;\
+27.\
+28. SELECT nombre FROM tienda.producto WHERE codigo_fabricante IN (1,3,5) ;\
+29. SELECT nombre AS nombre_de_producto , precio AS euros , precio * 100  AS c\'e9ntimos FROM tienda.producto;\
+30. SELECT nombre FROM tienda.fabricante WHERE nombre LIKE 'S%';\
+31. SELECT nombre FROM tienda.fabricante WHERE nombre LIKE '%e';\
+32.SELECT nombre FROM tienda.fabricante WHERE nombre LIKE '%w%';\
+33. SELECT nombre FROM tienda.fabricante WHERE LENGTH(nombre) <= 4;\
+34.SELECT nombre FROM tienda.producto WHERE nombre LIKE 'Port\'e1til%';\
+35.SELECT nombre FROM tienda.producto WHERE nombre LIKE '%Monitor%' AND precio < 215;\
+36.SELECT  tienda.producto.precio , tienda.producto.nombre FROM tienda.producto  INNER JOIN tienda.fabricante ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo HAVING precio >= 180 ORDER BY precio DESC, nombre;\
+\
+\pard\pardeftab720\sl360\sa320
+
+\b\fs30 \cf2 1.1.5\'a0Consultas multitabla (Composici\'f3n externa)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b0\fs24 \cf0 1. SELECT fabricante.nombre, producto.nombre FROM tienda.fabricante LEFT JOIN tienda.producto ON tienda.fabricante.codigo = tienda.producto.codigo_fabricante  ;\
+2.\
+3. No, ya que para cada c\'f3digo de producto tenemos una asociaci\'f3n obligatoria de fabricante.\
+\
+\pard\pardeftab720\sl360\sa320
+
+\b\fs30 \cf2 1.1.6\'a0Consultas resumen\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b0\fs24 \cf0 1.SELECT COUNT(nombre) AS TotalProductos FROM tienda.producto ;\
+2. SELECT COUNT(nombre) AS TotalFAbricantes FROM tienda.fabricante ;\
+3.\
+4. SELECT AVG (precio) FROM tienda.producto ;\
+5.SELECT nombre,precio FROM tienda.producto  WHERE precio = (SELECT MIN(precio) FROM tienda.producto);\
+6. SELECT nombre,precio FROM tienda.producto  WHERE precio = (SELECT MAX(precio) FROM tienda.producto);\
+7. SELECT nombre,precio FROM tienda.producto  WHERE precio = (SELECT MIN(precio) FROM tienda.producto);\
+8.SELECT nombre,precio FROM tienda.producto  WHERE precio = (SELECT MAX(precio) FROM tienda.producto);\
+9. SELECT SUM(precio) FROM tienda.producto;\
+10. SELECT COUNT(codigo_fabricante) FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND tienda.fabricante.codigo = '1';\
+11. SELECT  AVG(precio) FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND tienda.fabricante.codigo = '1';\
+12. SELECT  MIN(precio) FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND tienda.fabricante.codigo = '1';\
+13. SELECT  MAX(precio) FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND tienda.fabricante.codigo = '1';\
+14. SELECT  SUM(precio) FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND tienda.fabricante.codigo = '1';\
+15. SELECT  MAX(precio), MIN(precio), Avg(precio) FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND tienda.fabricante.codigo = '6';\
+16.\
+17.  SELECT  MAX(precio), MIN(precio), Avg(precio), tienda.fabricante.nombre  FROM tienda.producto  INNER JOIN tienda.fabricante   ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo GROUP BY tienda.fabricante.nombre;\
+18.  SELECT  MAX(precio), MIN(precio), Avg(precio), tienda.fabricante.codigo  FROM tienda.producto  INNER JOIN tienda.fabricante   ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo GROUP BY tienda.fabricante.nombre HAVING Avg(precio) > 200;\
+19.  SELECT  MAX(precio), MIN(precio), Avg(precio), tienda.fabricante.nombre  FROM tienda.producto  INNER JOIN tienda.fabricante   ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo GROUP BY tienda.fabricante.nombre HAVING Avg(precio) > 200;\
+20. SELECT COUNT(*) AS productos_precio FROM tienda.producto WHERE precio >= 180;\
+21.\
+22.  SELECT   Avg(precio), tienda.fabricante.nombre FROM tienda.producto  INNER JOIN tienda.fabricante   ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo GROUP BY tienda.fabricante.nombre;\
+23. SELECT   Avg(precio), tienda.fabricante.codigo FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo GROUP BY tienda.fabricante.codigo;\
+24. SELECT   tienda.fabricante.nombre FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo GROUP BY tienda.fabricante.nombre HAVING AVG(precio) >= 150;\
+25. SELECT   tienda.fabricante.nombre FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo GROUP BY tienda.fabricante.nombre HAVING COUNT(codigo_fabricante) >= 2;\
+26. SELECT   tienda.fabricante.nombre, COUNT(codigo_fabricante) FROM tienda.producto  INNER JOIN tienda.fabricante  ON tienda.producto.codigo_fabricante = tienda.fabricante.codigo WHERE precio >= 220  GROUP BY tienda.fabricante.nombre;\
+27.\
+28.\
+\
+\pard\pardeftab720\sl360\sa320
+
+\b\fs30 \cf2 1.1.7\'a0Subconsultas (En la cl\'e1usula\'a0
+\f1\fs34 WHERE
+\f0\fs30 )\
+\pard\pardeftab720\sl400\sa320
+
+\fs32 \cf2 1.1.7.1\'a0Con operadores b\'e1sicos de comparaci\'f3n\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\ls1\ilvl0
+\b0\fs24 \cf0 1.SELECT producto.nombre, fabricante.nombre  FROM tienda.producto, tienda.fabricante WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND codigo_fabricante = '2';\
+2. SELECT producto.nombre, fabricante.nombre  FROM tienda.producto, tienda.fabricante WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND precio= (SELECT MAX(precio)FROM tienda.producto WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND codigo_fabricante = '2') \
+3. SELECT producto.nombre  FROM tienda.producto, tienda.fabricante WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND codigo_fabricante='2' AND precio = ( SELECT MAX(precio) FROM tienda.producto WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo)  ;
+\b\fs30 \cf2 \
+\pard\pardeftab720\sl360\sa320
+
+\b0\fs24 \cf0 4. SELECT producto.nombre  FROM tienda.producto, tienda.fabricante WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo AND codigo_fabricante='3' AND precio = ( SELECT MIN(precio) FROM tienda.producto WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo)  ;\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 5.\
+6.\
+\
+\pard\pardeftab720\sl400\sa320
+
+\b\fs32 \cf2 1.1.7.2\'a0Subconsultas con\'a0
+\f1\fs28 ALL
+\f0\fs32 \'a0y\'a0
+\f1\fs28 ANY
+\f0\b0\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 8. SELECT producto.nombre FROM tienda.producto WHERE precio = ANY ( SELECT precio FROM tienda.producto WHERE precio> 700 );\
+9. SELECT producto.nombre FROM tienda.productoWHERE precio = ANY ( SELECT precio FROM tienda.producto WHERE precio<100 );\
+10.\
+11. SELECT fabricante.nombre  FROM tienda.fabricante WHERE codigo = ALL ( SELECT nombre FROM tienda.producto WHERE tienda.fabricante.codigo = tienda.producto.codigo_fabricante  );\
+\
+\pard\pardeftab720\sl400\sa320
+
+\b\fs32 \cf2 1.1.7.3\'a0Subconsultas con\'a0
+\f1\fs28 IN
+\f0\fs32 \'a0y\'a0
+\f1\fs28 NOT IN
+\f0\b0\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 12. SELECT fabricante.nombre  FROM tienda.fabricante WHERE codigo IN ( SELECT codigo_fabricante FROM tienda.producto WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo );\
+13. SELECT fabricante.nombre  FROM tienda.fabricante WHERE codigo NOT IN ( SELECT codigo_fabricante FROM tienda.producto WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo );\
+\
+\pard\pardeftab720\sl400\sa320
+
+\b\fs32 \cf2 1.1.7.4\'a0Subconsultas con\'a0
+\f1\fs28 EXISTS
+\f0\fs32 \'a0y\'a0
+\f1\fs28 NOT EXISTS
+\f0\b0\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 14.SELECT fabricante.nombre  FROM tienda.fabricante WHERE EXISTS  ( SELECT codigo_fabricante FROM tienda.producto WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo );\
+15.SELECT fabricante.nombre  FROM tienda.fabricante WHERE NOT EXISTS  ( SELECT codigo_fabricante FROM tienda.producto WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo );\
+\
+\pard\pardeftab720\sl400\sa320
+
+\b\fs32 \cf2 1.1.7.5\'a0Subconsultas correlacionadas
+\b0\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 16.SELECT fabricante.nombre, producto.nombre ,producto.precio FROM tienda.fabricante, tienda.producto WHERE precio = ( SELECT MAX(precio) FROM tienda.producto WHERE tienda.producto.codigo_fabricante = tienda.fabricante.codigo);\
+17.\
+18.\
+\
+\pard\pardeftab720\sl360\sa320
+
+\b\fs30 \cf2 1.1.8\'a0Subconsultas (En la cl\'e1usula\'a0
+\f1\fs34 HAVING
+\f0\fs30 )
+\b0\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 7.\
+\
+}
